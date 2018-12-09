@@ -1,0 +1,12 @@
+"..\OBJ\NRF24L01.obj",
+"..\OBJ\Rocker.obj",
+"..\OBJ\STARTUP.obj",
+"..\OBJ\delay.obj",
+"..\OBJ\uart.obj",
+"..\OBJ\timer.obj",
+"..\OBJ\spi.obj",
+"..\OBJ\adc.obj",
+"..\OBJ\MAIN.obj",
+"..\OBJ\Version.obj" 
+TO "..\OBJ\NRF_Car_TEST" 
+PRINT(".\Listings\NRF_Car_TEST.m51") RAMSIZE(256) 

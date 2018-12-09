@@ -1,0 +1,39 @@
+C51 COMPILER V9.56.0.0   NRF_DT                                                            10/31/2018 23:29:36 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE NRF_DT
+OBJECT MODULE PLACED IN ..\OBJ\NRF_DT.obj
+COMPILER INVOKED BY: D:\Program Files (x86)\MDK\C51\BIN\C51.EXE ..\APP\NRF_DT\NRF_DT.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.
+                    -.\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM\pca;..\
+                    -HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT=
+                    -ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\NRF_DT.lst) OBJECT(..\OBJ\NRF_DT.obj)
+
+line level    source
+
+   1          #incldue "NEF_DT.h"
+*** WARNING C315 IN LINE 1 OF ..\APP\NRF_DT\NRF_DT.c: unknown #directive 'incldue'
+   2          #include "stdint.h"
+*** WARNING C318 IN LINE 2 OF ..\APP\NRF_DT\NRF_DT.c: can't open file 'stdint.h'
+   3          typedef struct{
+   4                  uint8_t Head_H;                 //帧头H
+*** ERROR C141 IN LINE 4 OF ..\APP\NRF_DT\NRF_DT.c: syntax error near 'uint8_t'
+*** ERROR C129 IN LINE 4 OF ..\APP\NRF_DT\NRF_DT.c: missing ';' before 'Head_H'
+   5                  uint8_t Head_L;                 //帧头L
+   6                  uint8_t SLAVE_Addr;             //从机地址
+   7                  uint8_t Command;                //命令字
+   8                  uint8_t Data_Len;               //数据长度
+   9                  uint8_t *Data_Buff;             //数据包
+  10                  uint8_t Sum_Check;              //和校验
+  11          }DT_TypeDef;
+  12          
+  13          void NRFSend_Data(DT_TypeDef* _Data_Pack)
+  14          {
+  15                  uint8_t sat;
+  16          
+  17                  
+  18          
+  19          
+  20          }
+  21          
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  2 ERROR(S)

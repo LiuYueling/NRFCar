@@ -1,0 +1,142 @@
+C51 COMPILER V9.56.0.0   ADC                                                               12/09/2018 09:23:21 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE ADC
+OBJECT MODULE PLACED IN ..\OBJ\adc.obj
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil\Keil_v5\C51\BIN\C51.EXE ..\SYSTEM\adc\adc.c OPTIMIZE(8,SPEED) BROWSE IN
+                    -CDIR(..\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM\p
+                    -ca;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARI
+                    -TYBIT=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\adc.lst) TABS(2) OBJECT(..\OBJ\adc.obj)
+
+line level    source
+
+   1          /**********************************************************************
+   2          -  File name : adc.c
+   3          -  Author : yueling_liu Version: 0.1  Date: 2018年10月01日星期一
+   4          -  Description :  硬件ADC
+   5          -  History :
+   6             NO.<author>    <time>    <version> <desc>
+   7             1.yueling_liu  18/10/01  0.1     project initial
+   8          **********************************************************************/
+   9          
+  10          #include "adc.h"
+  11          #include "delay.h"
+  12          
+  13          //--Type Definition--//
+  14          #define ADC_POWER_ON  0x80        //ADC电源控制位
+  15          #define ADC_FLAG    0x10              //ADC完成标志
+  16          #define ADC_START   0x08              //ADC起始控制位
+  17          #define ADC_SPEEDLL   0x00              //540个时钟
+  18          #define ADC_SPEEDL    0x20              //360个时钟
+  19          #define ADC_SPEEDH    0x40              //180个时钟
+  20          #define ADC_SPEEDHH   0x60              //90个时钟
+  21          
+  22          volatile bit ADC_OK_Flag = 1;//AD转换完成标志
+  23          uint16_t ADC_BUF[4];
+  24          //volatile uint8_t ADCXY_CH = 0;
+  25          volatile uint8_t ADCXY_CH = 0;
+  26          /**********************************************************************
+  27          -  Function :   void Adc_Init(void)
+  28          -  Description :  SPI Init
+  29          -  Input :      void
+  30          -  Return :     void
+  31          -  Others :     IO复用ADC:
+  32                    Rocker1_CHX ->  ADC0(P1^0)
+  33                    Rocker1_CHY ->  ADC1(P1^1)
+  34                    Rocker2_CHX ->  ADC6(P1^6)
+  35                    Rocker2_CHY ->  ADC7(P1^7)
+  36          **********************************************************************/
+  37          void Adc_Init(void)
+  38          {
+  39   1        P0M0 = 0x00;
+  40   1        P0M1 = 0xC3;
+  41   1        
+  42   1        /*IO复用:设置P1口为AD口*/                   
+  43   1          P1ASF = 0xC3;
+  44   1        
+  45   1        /*清除结果寄存器*/
+  46   1        ADC_RES  = 0x00;                 
+  47   1          ADC_RESL = 0x00;
+  48   1        
+  49   1        /*开启ADC电源; 540个时钟; CH = ADC_0;*/
+  50   1        ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | 0x00;
+  51   1        
+  52   1        EADC = 1;//允许A/D转换中断
+C51 COMPILER V9.56.0.0   ADC                                                               12/09/2018 09:23:21 PAGE 2   
+
+  53   1      }
+  54          
+  55          /**********************************************************************
+  56          -  Function :   void Adc_Interruption(void) interrupt 5
+  57          -  Description :  ADC中断服务函数
+  58          -  Input :      void
+  59          -  Return :     void
+  60          -  Others :     清除AD中断标志
+  61          **********************************************************************/
+  62          void Adc_Interruption(void) interrupt 5
+  63          { 
+  64   1        ADC_CONTR &= !ADC_FLAG;         //清除ADC中断标志
+  65   1        
+  66   1        switch(ADCXY_CH)
+  67   1        {
+  68   2          case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+  69   2          case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+  70   2      //    case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
+  71   2      //    case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
+  72   2          default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
+  73   2        }
+  74   1        ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ADCXY_CH;//切换通道  
+  75   1      }
+  76          
+  77          
+  78          //uint16_t Get_CH_ADC(uint8_t ch)
+  79          //{
+  80          //  uint16_t ADC_Buff;
+  81          //  
+  82          //  ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ch;//切换通道
+  83          //  _nop_();                        //等待4个NOP
+  84          //  _nop_();
+  85          //  _nop_();
+  86          //  _nop_();
+  87          //  while (!(ADC_CONTR & ADC_FLAG));//等待ADC转换完成
+  88          //    ADC_CONTR &= ~ADC_FLAG;         //Close ADC
+  89          //  
+  90          ////  ADC_OK_Flag = 1;//清除AD完成标志
+  91          ////  while(ADC_OK_Flag == 0);//等待AD转换完成
+  92          ////  ADC_Buff = ADC_RES*4 + ADC_RESL;
+  93          //  ADC_Buff = ADC_RES;
+  94          //  
+  95          //  return ADC_Buff;  
+  96          //}
+  97          
+  98          //uint16_t Get_ADC_Average(uint8_t ch, uint8_t count)
+  99          //{
+ 100          //  uint32_t sum = 0;
+ 101          //  uint8_t i;
+ 102          //  
+ 103          //  for(i=0; i<count; count++)
+ 104          //  {
+ 105          //    sum += Get_CH_ADC(ch);
+ 106          //    Delay5ms();
+ 107          //  }
+ 108          //  
+ 109          //  return (uint16_t)(sum/count); 
+ 110          //}
+ 111          
+ 112          
+
+
+C51 COMPILER V9.56.0.0   ADC                                                               12/09/2018 09:23:21 PAGE 3   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    123    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
