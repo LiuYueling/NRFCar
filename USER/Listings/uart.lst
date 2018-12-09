@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 09:23:21 PAGE 1   
+C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 13:21:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE UART
@@ -6,7 +6,7 @@ OBJECT MODULE PLACED IN ..\OBJ\uart.obj
 COMPILER INVOKED BY: D:\Program Files (x86)\Keil\Keil_v5\C51\BIN\C51.EXE ..\SYSTEM\uart\uart.c OPTIMIZE(8,SPEED) BROWSE 
                     -INCDIR(..\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM
                     -\pca;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PA
-                    -RITYBIT=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\uart.lst) TABS(2) OBJECT(..\OBJ\uart.o
+                    -RITYBIT=ODD_PARITY,TEST_MODE=0,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\uart.lst) TABS(2) OBJECT(..\OBJ\uart.o
                     -bj)
 
 line level    source
@@ -62,7 +62,7 @@ line level    source
   49   1      //  
   50   1      //  Buff = P_SW1;
   51   1      //  Buff &= ~(S1_S0 | S1_S1);    //S1_S0=0 S1_S1=1
-C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 09:23:21 PAGE 2   
+C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 13:21:58 PAGE 2   
 
   52   1      //  Buff |= S1_S1;               //(P1.6/RxD_3, P1.7/TxD_3)
   53   1      //  P_SW1 = Buff; 
@@ -126,7 +126,7 @@ line level    source
  111   2        }
  112   1      }
  113          
-C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 09:23:21 PAGE 3   
+C51 COMPILER V9.56.0.0   UART                                                              12/09/2018 13:21:58 PAGE 3   
 
  114          
  115          /**********************************************************************
@@ -139,12 +139,13 @@ line level    source
  122          void UART_SendString(uint8_t *Str)
  123          {
  124   1      #if (TEST_MODE == 1)  //TEST
- 125   1        while(*Str != '\0')
- 126   1        {
- 127   2          UART_SendData(*Str++);
- 128   2        }
- 129   1      #endif
+                while(*Str != '\0')
+                {
+                  UART_SendData(*Str++);
+                }
+              #endif
  130   1      }
+*** WARNING C280 IN LINE 122 OF ..\SYSTEM\uart\uart.c: 'Str': unreferenced local variable
  131          
  132          
  133          
@@ -172,7 +173,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     99    ----
+   CODE SIZE        =     69    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -182,4 +183,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

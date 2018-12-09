@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 09:23:20 PAGE 1   
+C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 13:21:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE NRF24L01
@@ -6,7 +6,7 @@ OBJECT MODULE PLACED IN ..\OBJ\NRF24L01.obj
 COMPILER INVOKED BY: D:\Program Files (x86)\Keil\Keil_v5\C51\BIN\C51.EXE ..\HARDWARE\NRF24L01\NRF24L01.c OPTIMIZE(8,SPEE
                     -D) BROWSE INCDIR(..\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc
                     -;..\SYSTEM\pca;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=1152
-                    -00,UART_PARITYBIT=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\NRF24L01.lst) TABS(2) OBJECT
+                    -00,UART_PARITYBIT=ODD_PARITY,TEST_MODE=0,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\NRF24L01.lst) TABS(2) OBJECT
                     -(..\OBJ\NRF24L01.obj)
 
 line level    source
@@ -62,7 +62,7 @@ line level    source
   49   1        NRF24L01_IRQ = 1; //拉高NRF24L01_IRQ,准备读取NRF24L01_IRQ
   50   1        
   51   1        
-C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 09:23:20 PAGE 2   
+C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 13:21:58 PAGE 2   
 
   52   1        SPI_Init();//初始化NRF24L01_SPI
   53   1        
@@ -126,7 +126,7 @@ line level    source
  111   1        NRF24L01_SPI_CSN = 0;       //使能SPI传输
  112   1        SPI_ReadWriteByte(Reg);       //发送寄存器号
  113   1        Reg_Data = SPI_ReadWriteByte(0xFF); //读取寄存器的值
-C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 09:23:20 PAGE 3   
+C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 13:21:58 PAGE 3   
 
  114   1        NRF24L01_SPI_CSN = 1;       //去能SPI传输
  115   1        
@@ -190,7 +190,7 @@ line level    source
  173   1        
  174   1        NRF24L01_CE = 0;
  175   1        NRF24L01_Write_Buf(WR_TX_PLOAD, TxBuf, TX_PLOAD_WIDTH);//写数据到TX BUF 32个字节
-C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 09:23:20 PAGE 4   
+C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 13:21:58 PAGE 4   
 
  176   1        NRF24L01_CE = 1;        //启动发送
  177   1        while(NRF24L01_IRQ != 0);   //等待发送完毕
@@ -254,7 +254,7 @@ line level    source
  235   1        
  236   1        NRF24L01_CE = 1; //CE为高,进入接收模式 
  237   1      }
-C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 09:23:20 PAGE 5   
+C51 COMPILER V9.56.0.0   NRF24L01                                                          12/09/2018 13:21:58 PAGE 5   
 
  238          
  239          /**********************************************************************
