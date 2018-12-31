@@ -1,6 +1,6 @@
-
 #include "NRF24L01.h"
 #include "spi.h"
+
 extern volatile bit SPI_Busy_Flag;
 const uint8_t TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 const uint8_t RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
@@ -151,11 +151,13 @@ uint8_t NRF24L01_Write_Buf(uint8_t Reg, uint8_t *p_Buf, uint8_t Len)
 {
 	uint8_t status,u8_ctr;
 	
+//	EA = 0;
 	NRF24L01_SPI_CSN = 0;				//使能SPI传输
 	status = SPI_ReadWriteByte(Reg);	//发送寄存器号
 	for(u8_ctr=0; u8_ctr<Len; u8_ctr++)	//写入数据
 		SPI_ReadWriteByte(*p_Buf++);
 	NRF24L01_SPI_CSN = 1;				//去能SPI传输
+//	EA = 1;
 	
 	return (status);					//返回状态值
 }
@@ -174,7 +176,7 @@ uint8_t NRF24L01_TxPacket(uint8_t *TxBuf)
 	NRF24L01_CE = 0;
 	NRF24L01_Write_Buf(WR_TX_PLOAD, TxBuf, TX_PLOAD_WIDTH);//写数据到TX BUF 32个字节
 	NRF24L01_CE = 1;				//启动发送
-	while(NRF24L01_IRQ != 0);		//等待发送完毕
+	while(NRF24L01_IRQ == 0);		//等待发送完毕
 	sta = NRF24L01_Read_Reg(STATUS);//读取状态寄存器的值
 	NRF24L01_Write_Reg(NRF_WRITE_REG+STATUS, sta);//清除TX_DS或MAX_RT中断标志
 	
