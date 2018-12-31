@@ -1,13 +1,13 @@
-C51 COMPILER V9.56.0.0   VERSION                                                           12/09/2018 13:21:59 PAGE 1   
+C51 COMPILER V9.56.0.0   VERSION                                                           12/31/2018 17:06:31 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE VERSION
 OBJECT MODULE PLACED IN ..\OBJ\Version.obj
-COMPILER INVOKED BY: D:\Program Files (x86)\Keil\Keil_v5\C51\BIN\C51.EXE ..\Version\Version.c OPTIMIZE(8,SPEED) BROWSE I
-                    -NCDIR(..\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM\
-                    -pca;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PAR
-                    -ITYBIT=ODD_PARITY,TEST_MODE=0,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\Version.lst) TABS(2) OBJECT(..\OBJ\Vers
-                    -ion.obj)
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE ..\Version\Version.c OPTIMIZE(8,SPEED) BROWSE INCDIR
+                    -(..\USER;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\adc;..\SYSTEM\eeprom;..\SYSTEM\timer;..\SYSTEM\pca;..\SYSTEM
+                    -\spi;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT
+                    -=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\Version.lst) TABS(2) OBJECT(..\OBJ\Version.ob
+                    -j)
 
 line level    source
 

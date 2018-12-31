@@ -1,12 +1,12 @@
-C51 COMPILER V9.56.0.0   MAIN                                                              12/09/2018 13:21:58 PAGE 1   
+C51 COMPILER V9.56.0.0   MAIN                                                              12/31/2018 17:06:31 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN ..\OBJ\MAIN.obj
-COMPILER INVOKED BY: D:\Program Files (x86)\Keil\Keil_v5\C51\BIN\C51.EXE MAIN.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\USER;
-                    -..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM\pca;..\HARDWAR
-                    -E\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT=ODD_PAR
-                    -ITY,TEST_MODE=0,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\MAIN.lst) TABS(2) OBJECT(..\OBJ\MAIN.obj)
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE MAIN.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\USER;..\SY
+                    -STEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\adc;..\SYSTEM\eeprom;..\SYSTEM\timer;..\SYSTEM\pca;..\SYSTEM\spi;..\HARDWA
+                    -RE\NRF24L01;..\HARDWARE\Rocker;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT=ODD_PARITY,TE
+                    -ST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\MAIN.lst) TABS(2) OBJECT(..\OBJ\MAIN.obj)
 
 line level    source
 
@@ -35,142 +35,163 @@ line level    source
   23          //extern volatile uint16_t ADC_BUFF_CH_0_1_6_7[4];
   24          extern volatile uint16_t ADC_BUFF[2];
   25          
-  26          volatile bit Delay_Time0_500ms_Flag = 0;
-  27          xdata uint8_t tmp_buf[32];
-  28          
-  29          sbit LED = P5^4;
-  30          sbit Rocker1_Key = P2^2;
-  31          //sbit Rocker2_Key = P2^3;
-  32          
-  33          void System_Init(void)
-  34          {
-  35   1        /*MCLK Init*/
-  36   1        CLK_DIV = 0x00; 
-  37   1        
-  38   1        /*IO_Init; P0-P7 IO_MODE:准双向IO*/
-  39   1        P0M0 = 0x00;
-  40   1        P0M1 = 0x00;
-  41   1        P1M0 = 0x00;
-  42   1        P1M1 = 0x00;
-  43   1        P2M0 = 0x00;
-  44   1        P2M1 = 0x00;
-  45   1        P3M0 = 0x00;
-  46   1        P3M1 = 0x00;
-  47   1        P4M0 = 0x00;
-  48   1        P4M1 = 0x00;
-  49   1        P5M0 = 0x00;
-  50   1        P5M1 = 0x00;
-  51   1        P6M0 = 0x00;
-  52   1        P6M1 = 0x00;
-C51 COMPILER V9.56.0.0   MAIN                                                              12/09/2018 13:21:58 PAGE 2   
+  26          
+  27          
+  28          volatile bit Delay_Time0_500ms_Flag = 0;
+  29          xdata uint8_t tmp_buf[16];
+  30          xdata uint8_t Tx_tmp_buff[32] = "abcdefghijklmnopqrstyuwxyz12345";
+  31          
+  32          sbit LED_RUN = P5^4;
+  33          sbit Rocker1_Key = P2^2;
+  34          //sbit Rocker2_Key = P2^3;
+  35          
+  36          void System_Init(void)
+  37          {
+  38   1        /*MCLK Init*/
+  39   1        CLK_DIV = 0x00; 
+  40   1        
+  41   1        /*IO_Init; P0-P7 IO_MODE:准双向IO*/
+  42   1        P0M0 = 0x00;
+  43   1        P0M1 = 0x00;
+  44   1        P1M0 = 0x00;
+  45   1        P1M1 = 0x00;
+  46   1        P2M0 = 0x00;
+  47   1        P2M1 = 0x00;
+  48   1        P3M0 = 0x00;
+  49   1        P3M1 = 0x00;
+  50   1        P4M0 = 0x00;
+  51   1        P4M1 = 0x00;
+  52   1        P5M0 = 0x00;
+C51 COMPILER V9.56.0.0   MAIN                                                              12/31/2018 17:06:31 PAGE 2   
 
-  53   1        P7M0 = 0x00;
-  54   1        P7M1 = 0x00;
-  55   1        
-  56   1        LED = 1;      //LED OFF
-  57   1      #ifdef NRF_CAR_MASTER
+  53   1        P5M1 = 0x00;
+  54   1        P6M0 = 0x00;
+  55   1        P6M1 = 0x00;
+  56   1        P7M0 = 0x00;
+  57   1        P7M1 = 0x00;
+  58   1        
+  59   1        LED_RUN = 1;      //LED OFF
+  60   1      #ifdef NRF_CAR_MASTER
                 Rocker1_Key = 1;
               //  Rocker2_Key = 1;
               #elif defined NRF_CAR_SLAVE
-  61   1        
-  62   1      #endif
-  63   1        
-  64   1        EA = 1;       //开启总中断
-  65   1        
-  66   1      #if (TEST_MODE == 1)  //TEST
-                UART_Init();    //串口初始化
-              #endif
-  69   1        
-  70   1      #ifdef NRF_CAR_MASTER
-                UART_SendString("NRF_CAR_MASTER DEMO\r\n");
+  64   1        
+  65   1      #endif
+  66   1        
+  67   1        EA = 1;       //开启总中断
+  68   1        
+  69   1      #if (TEST_MODE == 1)  //TEST
+  70   1        UART_Init();    //串口初始化
+  71   1      #endif
+  72   1        
+  73   1      #ifdef NRF_CAR_MASTER
+                UART_SendString("NRF CAR MASTER DEMO\r\n");
                 UART_SendString("DEMO Version: 0.1\r\n");
               #elif defined NRF_CAR_SLAVE
-  74   1        UART_SendString("NRF_CAR_SLAVE\r\n");
-  75   1        UART_SendString("DEMO Version: 0.1\r\n");
-  76   1      #endif
-  77   1        
-  78   1        Timer0_1MS_Init();  //Timer0初始化
-  79   1        NRF24L01_Init();  //NRF24L01初始化
+  77   1        UART_SendString("NRF CAR SLAVE\r\n");
+  78   1        UART_SendString("DEMO Version: 0.1\r\n");
+  79   1      #endif
   80   1        
-  81   1      #ifdef NRF_CAR_MASTER
-                Adc_Init();     //ADC初始化
+  81   1        Timer0_1MS_Init();  //Timer0初始化
+  82   1        NRF24L01_Init();  //NRF24L01初始化
+  83   1        
+  84   1      #ifdef NRF_CAR_MASTER
+              //  Adc_Init();     //ADC初始化
               #elif defined NRF_CAR_SLAVE
-  84   1        
-  85   1      #endif
-  86   1        
-  87   1      }
-  88          
-  89          
-  90          /**********************************************************************
-  91          -  Function :   int main(void)
-  92          -  Description :  main
-  93          **********************************************************************/
-  94          int main(void)
-  95          {
-  96   1        System_Init();//系统初始化
-  97   1        UART_SendString("System Init OK\r\n");
-  98   1        UART_SendString("NRF24L01 Check\r\n");
-  99   1        
- 100   1        while(NRF24L01_Check())
- 101   1        {
- 102   2          Delay200ms();
- 103   2          UART_SendString("NRF24L01 Error\r\n");
- 104   2        }
- 105   1        UART_SendString("NRF24L01 OK\r\n");
- 106   1        
- 107   1      #ifdef NRF_CAR_MASTER
+  87   1        
+  88   1      #endif
+  89   1        
+  90   1      }
+  91          
+  92          
+  93          /**********************************************************************
+  94          -  Function :   int main(void)
+  95          -  Description :  main
+  96          **********************************************************************/
+  97          int main(void)
+  98          {
+  99   1        System_Init();//系统初始化
+ 100   1        UART_SendString("System Init OK\r\n");
+ 101   1        UART_SendString("NRF24L01 Check...\r\n");
+ 102   1        
+ 103   1        while(NRF24L01_Check())//检查NRF是否存在
+ 104   1        {
+ 105   2          Delay200ms();
+ 106   2          UART_SendString("NRF24L01 Check Error\r\n");
+ 107   2        }
+ 108   1        UART_SendString("NRF24L01 Check OK\r\n");
+ 109   1        
+ 110   1      #ifdef NRF_CAR_MASTER
                 NRF24L01_TX_Mode();//配置NRF24L01为Tx模式
+                UART_SendString("NRF24L01 TX Mode\r\n");
               #elif defined NRF_CAR_SLAVE
- 110   1        NRF24L01_RX_Mode();//配置NRF24L01到RX模式
- 111   1      #endif
- 112   1        
- 113   1        while(1)
- 114   1        {
-C51 COMPILER V9.56.0.0   MAIN                                                              12/09/2018 13:21:58 PAGE 3   
+ 114   1        NRF24L01_RX_Mode();//配置NRF24L01到RX模式
+C51 COMPILER V9.56.0.0   MAIN                                                              12/31/2018 17:06:31 PAGE 3   
 
- 115   2          
- 116   2      //    if(Delay_Time0_500ms_Flag == 1)
- 117   2          {
- 118   3            Delay_Time0_500ms_Flag = 0;
- 119   3            
- 120   3      #ifdef NRF_CAR_MASTER
-                    Get_Rocker();//获得摇杆数据
-              #elif defined NRF_CAR_SLAVE
- 123   3            
- 124   3      #endif
- 125   3            LED = !LED;
- 126   3          }
- 127   2          
- 128   2      #ifdef NRF_CAR_MASTER
+ 115   1        UART_SendString("NRF24L01 RX Mode\r\n");
+ 116   1      #endif
+ 117   1        
+ 118   1        while(1)
+ 119   1        {
+ 120   2          if(Delay_Time0_500ms_Flag == 1)
+ 121   2          {
+ 122   3      #ifdef NRF_CAR_MASTER
+              //      Get_Rocker();//获得摇杆数据
+              //      UART_SendString("Get Rocker...\r\n");
+              //    sprintf(tmp_buf, "Hello World \r\n");
                   
+                    //
+                    if(NRF24L01_TxPacket(Tx_tmp_buff) == TX_OK)
+                    {
+                      UART_SendString("NRF24L01 TxPacket Send OK");
+                    }
+                    else
+                    {
+                      UART_SendString("NRF24L01 TxPacket Send ERR");
+                    }
               #elif defined NRF_CAR_SLAVE
- 131   2          if(NRF24L01_RxPacket(tmp_buf)==0)//一旦接收到信息,则显示出来.
- 132   2          {
- 133   3            tmp_buf[29] = '\r';
- 134   3            tmp_buf[30] = '\n';
- 135   3            tmp_buf[31] = '\0';//加入字符串结束符
- 136   3            UART_SendString(tmp_buf);    
- 137   3          }
- 138   2      #endif
- 139   2        }
- 140   1        
- 141   1      }
- 142          
- 143          
- 144          
- 145          
- 146          
- 147          
+ 137   3          
+ 138   3      #endif
+ 139   3      //      LED_RUN = !LED_RUN;
+ 140   3            Delay_Time0_500ms_Flag = 0;
+ 141   3          }
+ 142   2          
+ 143   2      #ifdef NRF_CAR_MASTER
+              //    if(NRF24L01_TxPacket("Hello World\r\n") == TX_OK)
+              //    {
+              //      Delay200ms();
+              //    }
+              #elif defined NRF_CAR_SLAVE
+ 149   2          if(NRF24L01_RxPacket(tmp_buf) == 0)//一旦接收到信息,则显示出来.
+ 150   2          {
+ 151   3            UART_SendString("Get NRF24L01 Rx Packet:\r\n");
+ 152   3            tmp_buf[29] = '\r';
+ 153   3            tmp_buf[30] = '\n';
+ 154   3            tmp_buf[31] = '\0';//加入字符串结束符
+ 155   3            UART_SendString(tmp_buf);    
+ 156   3          }
+ 157   2      #endif
+ 158   2        }
+ 159   1        
+ 160   1      }
+ 161          
+ 162          
+ 163          
+ 164          
+ 165          
+ 166          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    155    ----
-   CONSTANT SIZE    =    101    ----
-   XDATA SIZE       =     32    ----
+   CODE SIZE        =    177    ----
+   CONSTANT SIZE    =    161    ----
+   XDATA SIZE       =     48    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
+C51 COMPILER V9.56.0.0   MAIN                                                              12/31/2018 17:06:31 PAGE 4   
+
 END OF MODULE INFORMATION.
 
 
