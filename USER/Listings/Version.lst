@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   VERSION                                                           12/31/2018 17:06:31 PAGE 1   
+C51 COMPILER V9.56.0.0   VERSION                                                           01/01/2019 22:52:35 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE VERSION
@@ -6,8 +6,8 @@ OBJECT MODULE PLACED IN ..\OBJ\Version.obj
 COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE ..\Version\Version.c OPTIMIZE(8,SPEED) BROWSE INCDIR
                     -(..\USER;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\adc;..\SYSTEM\eeprom;..\SYSTEM\timer;..\SYSTEM\pca;..\SYSTEM
                     -\spi;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT
-                    -=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\Version.lst) TABS(2) OBJECT(..\OBJ\Version.ob
-                    -j)
+                    -=ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE,ROCKER_SUM=1) DEBUG OBJECTEXTEND PRINT(.\Listings\Version.lst) OBJECT(..\OBJ\Versi
+                    -on.obj)
 
 line level    source
 

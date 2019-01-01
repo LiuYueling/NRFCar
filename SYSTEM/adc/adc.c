@@ -19,9 +19,10 @@
 #define ADC_SPEEDH		0x40            	//180个时钟
 #define ADC_SPEEDHH		0x60            	//90个时钟
 
+
+
 volatile bit ADC_OK_Flag = 1;//AD转换完成标志
-uint16_t ADC_BUF[4];
-//volatile uint8_t ADCXY_CH = 0;
+uint16_t ADC_BUF[4];//ADC数据缓存区
 volatile uint8_t ADCXY_CH = 0;
 /**********************************************************************
 -  Function :		void Adc_Init(void)
@@ -65,11 +66,17 @@ void Adc_Interruption(void) interrupt 5
 	
 	switch(ADCXY_CH)
 	{
+#if (ROCKER_SUM == 1)
 		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
 		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
-//		case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
-//		case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
 		default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
+#elif define (ROCKER_SUM == 2)
+		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+		case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
+		case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
+		default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
+#endif
 	}
 	ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ADCXY_CH;//切换通道	
 }

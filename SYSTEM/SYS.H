@@ -17,7 +17,10 @@
 #include "STC15.h"
 #include "typint.h"
 #include "intrins.h"
-#include "uart.h"
+#include "stdio.h"
+#include "intrins.h"
+//#include "uart.h"
+
 
 //--Type Definition--//
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   ADC                                                               12/31/2018 17:06:30 PAGE 1   
+C51 COMPILER V9.56.0.0   ADC                                                               01/01/2019 22:52:35 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE ADC
@@ -6,127 +6,134 @@ OBJECT MODULE PLACED IN ..\OBJ\adc.obj
 COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE ..\SYSTEM\adc\adc.c OPTIMIZE(8,SPEED) BROWSE INCDIR(
                     -..\USER;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\adc;..\SYSTEM\eeprom;..\SYSTEM\timer;..\SYSTEM\pca;..\SYSTEM\
                     -spi;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP\NRF_DT) DEFINE(STC_Y5,FOSC=11059200L,UART_BAUD=115200,UART_PARITYBIT=
-                    -ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE) DEBUG OBJECTEXTEND PRINT(.\Listings\adc.lst) TABS(2) OBJECT(..\OBJ\adc.obj)
+                    -ODD_PARITY,TEST_MODE=1,NRF_CAR_SLAVE,ROCKER_SUM=1) DEBUG OBJECTEXTEND PRINT(.\Listings\adc.lst) OBJECT(..\OBJ\adc.obj)
 
 line level    source
 
    1          /**********************************************************************
    2          -  File name : adc.c
-   3          -  Author : yueling_liu Version: 0.1  Date: 2018年10月01日星期一
-   4          -  Description :  硬件ADC
+   3          -  Author : yueling_liu Version: 0.1    Date: 2018年10月01日星期一
+   4          -  Description :        硬件ADC
    5          -  History :
-   6             NO.<author>    <time>    <version> <desc>
-   7             1.yueling_liu  18/10/01  0.1     project initial
+   6             NO.<author>          <time>          <version>       <desc>
+   7             1.yueling_liu        18/10/01        0.1                     project initial
    8          **********************************************************************/
    9          
   10          #include "adc.h"
   11          #include "delay.h"
   12          
   13          //--Type Definition--//
-  14          #define ADC_POWER_ON  0x80        //ADC电源控制位
-  15          #define ADC_FLAG    0x10              //ADC完成标志
-  16          #define ADC_START   0x08              //ADC起始控制位
-  17          #define ADC_SPEEDLL   0x00              //540个时钟
-  18          #define ADC_SPEEDL    0x20              //360个时钟
-  19          #define ADC_SPEEDH    0x40              //180个时钟
-  20          #define ADC_SPEEDHH   0x60              //90个时钟
+  14          #define ADC_POWER_ON    0x80                            //ADC电源控制位
+  15          #define ADC_FLAG                0x10                    //ADC完成标志
+  16          #define ADC_START               0x08                    //ADC起始控制位
+  17          #define ADC_SPEEDLL             0x00                    //540个时钟
+  18          #define ADC_SPEEDL              0x20                    //360个时钟
+  19          #define ADC_SPEEDH              0x40                    //180个时钟
+  20          #define ADC_SPEEDHH             0x60                    //90个时钟
   21          
-  22          volatile bit ADC_OK_Flag = 1;//AD转换完成标志
-  23          uint16_t ADC_BUF[4];
-  24          //volatile uint8_t ADCXY_CH = 0;
-  25          volatile uint8_t ADCXY_CH = 0;
-  26          /**********************************************************************
-  27          -  Function :   void Adc_Init(void)
-  28          -  Description :  SPI Init
-  29          -  Input :      void
-  30          -  Return :     void
-  31          -  Others :     IO复用ADC:
-  32                    Rocker1_CHX ->  ADC0(P1^0)
-  33                    Rocker1_CHY ->  ADC1(P1^1)
-  34                    Rocker2_CHX ->  ADC6(P1^6)
-  35                    Rocker2_CHY ->  ADC7(P1^7)
-  36          **********************************************************************/
-  37          void Adc_Init(void)
-  38          {
-  39   1        P0M0 = 0x00;
-  40   1        P0M1 = 0xC3;
-  41   1        
-  42   1        /*IO复用:设置P1口为AD口*/                   
-  43   1          P1ASF = 0xC3;
-  44   1        
-  45   1        /*清除结果寄存器*/
-  46   1        ADC_RES  = 0x00;                 
-  47   1          ADC_RESL = 0x00;
-  48   1        
-  49   1        /*开启ADC电源; 540个时钟; CH = ADC_0;*/
-  50   1        ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | 0x00;
-  51   1        
-  52   1        EADC = 1;//允许A/D转换中断
-C51 COMPILER V9.56.0.0   ADC                                                               12/31/2018 17:06:30 PAGE 2   
+  22          
+  23          
+  24          volatile bit ADC_OK_Flag = 1;//AD转换完成标志
+  25          uint16_t ADC_BUF[4];//ADC数据缓存区
+  26          volatile uint8_t ADCXY_CH = 0;
+  27          /**********************************************************************
+  28          -  Function :           void Adc_Init(void)
+  29          -  Description :        SPI Init
+  30          -  Input :                      void
+  31          -  Return :                     void
+  32          -  Others :                     IO复用ADC:
+  33                                                  Rocker1_CHX     ->      ADC0(P1^0)
+  34                                                  Rocker1_CHY     ->      ADC1(P1^1)
+  35                                                  Rocker2_CHX     ->      ADC6(P1^6)
+  36                                                  Rocker2_CHY     ->      ADC7(P1^7)
+  37          **********************************************************************/
+  38          void Adc_Init(void)
+  39          {
+  40   1              P0M0 = 0x00;
+  41   1              P0M1 = 0xC3;
+  42   1              
+  43   1              /*IO复用:设置P1口为AD口*/                   
+  44   1          P1ASF = 0xC3;
+  45   1              
+  46   1              /*清除结果寄存器*/
+  47   1              ADC_RES  = 0x00;                 
+  48   1          ADC_RESL = 0x00;
+  49   1              
+  50   1              /*开启ADC电源; 540个时钟; CH = ADC_0;*/
+  51   1              ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | 0x00;
+  52   1              
+C51 COMPILER V9.56.0.0   ADC                                                               01/01/2019 22:52:35 PAGE 2   
 
-  53   1      }
-  54          
-  55          /**********************************************************************
-  56          -  Function :   void Adc_Interruption(void) interrupt 5
-  57          -  Description :  ADC中断服务函数
-  58          -  Input :      void
-  59          -  Return :     void
-  60          -  Others :     清除AD中断标志
-  61          **********************************************************************/
-  62          void Adc_Interruption(void) interrupt 5
-  63          { 
-  64   1        ADC_CONTR &= !ADC_FLAG;         //清除ADC中断标志
-  65   1        
-  66   1        switch(ADCXY_CH)
-  67   1        {
-  68   2          case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
-  69   2          case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
-  70   2      //    case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
-  71   2      //    case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
-  72   2          default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
-  73   2        }
-  74   1        ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ADCXY_CH;//切换通道  
-  75   1      }
-  76          
-  77          
-  78          //uint16_t Get_CH_ADC(uint8_t ch)
-  79          //{
-  80          //  uint16_t ADC_Buff;
-  81          //  
-  82          //  ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ch;//切换通道
-  83          //  _nop_();                        //等待4个NOP
-  84          //  _nop_();
-  85          //  _nop_();
-  86          //  _nop_();
-  87          //  while (!(ADC_CONTR & ADC_FLAG));//等待ADC转换完成
-  88          //    ADC_CONTR &= ~ADC_FLAG;         //Close ADC
-  89          //  
-  90          ////  ADC_OK_Flag = 1;//清除AD完成标志
-  91          ////  while(ADC_OK_Flag == 0);//等待AD转换完成
-  92          ////  ADC_Buff = ADC_RES*4 + ADC_RESL;
-  93          //  ADC_Buff = ADC_RES;
-  94          //  
-  95          //  return ADC_Buff;  
-  96          //}
-  97          
-  98          //uint16_t Get_ADC_Average(uint8_t ch, uint8_t count)
-  99          //{
- 100          //  uint32_t sum = 0;
- 101          //  uint8_t i;
- 102          //  
- 103          //  for(i=0; i<count; count++)
- 104          //  {
- 105          //    sum += Get_CH_ADC(ch);
- 106          //    Delay5ms();
- 107          //  }
- 108          //  
- 109          //  return (uint16_t)(sum/count); 
- 110          //}
- 111          
- 112          
+  53   1              EADC = 1;//允许A/D转换中断
+  54   1      }
+  55          
+  56          /**********************************************************************
+  57          -  Function :           void Adc_Interruption(void) interrupt 5
+  58          -  Description :        ADC中断服务函数
+  59          -  Input :                      void
+  60          -  Return :                     void
+  61          -  Others :                     清除AD中断标志
+  62          **********************************************************************/
+  63          void Adc_Interruption(void) interrupt 5
+  64          {       
+  65   1              ADC_CONTR &= !ADC_FLAG;         //清除ADC中断标志
+  66   1              
+  67   1              switch(ADCXY_CH)
+  68   1              {
+  69   2      #if (ROCKER_SUM == 1)
+  70   2                      case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+  71   2                      case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+  72   2                      default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
+  73   2      #elif define (ROCKER_SUM == 2)
+                              case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+                              case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+                              case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
+                              case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
+                              default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
+              #endif
+  80   2              }
+  81   1              ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ADCXY_CH;//切换通道        
+  82   1      }
+  83          
+  84          
+  85          //uint16_t Get_CH_ADC(uint8_t ch)
+  86          //{
+  87          //      uint16_t ADC_Buff;
+  88          //      
+  89          //      ADC_CONTR = ADC_POWER_ON | ADC_SPEEDLL | ADC_START | ch;//切换通道
+  90          //      _nop_();                        //等待4个NOP
+  91          //      _nop_();
+  92          //      _nop_();
+  93          //      _nop_();
+  94          //      while (!(ADC_CONTR & ADC_FLAG));//等待ADC转换完成
+  95          //    ADC_CONTR &= ~ADC_FLAG;         //Close ADC
+  96          //      
+  97          ////    ADC_OK_Flag = 1;//清除AD完成标志
+  98          ////    while(ADC_OK_Flag == 0);//等待AD转换完成
+  99          ////    ADC_Buff = ADC_RES*4 + ADC_RESL;
+ 100          //      ADC_Buff = ADC_RES;
+ 101          //      
+ 102          //      return ADC_Buff;        
+ 103          //}
+ 104          
+ 105          //uint16_t Get_ADC_Average(uint8_t ch, uint8_t count)
+ 106          //{
+ 107          //      uint32_t sum = 0;
+ 108          //      uint8_t i;
+ 109          //      
+ 110          //      for(i=0; i<count; count++)
+ 111          //      {
+ 112          //              sum += Get_CH_ADC(ch);
+ 113          //              Delay5ms();
+ 114          //      }
+C51 COMPILER V9.56.0.0   ADC                                                               01/01/2019 22:52:35 PAGE 3   
 
+ 115          //      
+ 116          //      return (uint16_t)(sum/count);   
+ 117          //}
+ 118          
+ 119          
 
-C51 COMPILER V9.56.0.0   ADC                                                               12/31/2018 17:06:30 PAGE 3   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    123    ----

@@ -322,7 +322,7 @@
             <InterruptVectorAddress>0</InterruptVectorAddress>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STC_Y5, FOSC = 11059200L, UART_BAUD = 115200, UART_PARITYBIT = ODD_PARITY, TEST_MODE = 1, NRF_CAR_MASTER</Define>
+              <Define>STC_Y5, FOSC = 11059200L, UART_BAUD = 115200, UART_PARITYBIT = ODD_PARITY, TEST_MODE = 1, NRF_CAR_MASTER , ROCKER_SUM = 1</Define>
               <Undefine></Undefine>
               <IncludePath>..\USER;..\Version;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\timer;..\SYSTEM\spi;..\SYSTEM\adc;..\SYSTEM\pca;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP;..\APP\NRF_DT</IncludePath>
             </VariousControls>
@@ -380,6 +380,21 @@
               <FileName>NRF_DT.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\NRF_DT\NRF_DT.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>NRF24L01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\NRF24L01\NRF24L01.c</FilePath>
+            </File>
+            <File>
+              <FileName>Rocker.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Rocker\Rocker.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -387,7 +402,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
+                  <IncludeInBuild>1</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -421,21 +436,6 @@
                   </C51>
                 </File51>
               </FileOption>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HARDWARE</GroupName>
-          <Files>
-            <File>
-              <FileName>NRF24L01.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\NRF24L01\NRF24L01.c</FilePath>
-            </File>
-            <File>
-              <FileName>Rocker.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\Rocker\Rocker.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -506,6 +506,47 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\adc\adc.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                  <BankNo>65535</BankNo>
+                </CommonProperty>
+                <File51>
+                  <C51>
+                    <RegisterColoring>2</RegisterColoring>
+                    <VariablesInOrder>2</VariablesInOrder>
+                    <IntegerPromotion>2</IntegerPromotion>
+                    <uAregs>2</uAregs>
+                    <UseInterruptVector>2</UseInterruptVector>
+                    <Fuzzy>8</Fuzzy>
+                    <Optimize>10</Optimize>
+                    <WarningLevel>3</WarningLevel>
+                    <SizeSpeed>2</SizeSpeed>
+                    <ObjectExtend>2</ObjectExtend>
+                    <ACallAJmp>2</ACallAJmp>
+                    <InterruptVectorAddress>0</InterruptVectorAddress>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </C51>
+                </File51>
+              </FileOption>
             </File>
             <File>
               <FileName>eeprom.h</FileName>
@@ -954,7 +995,7 @@
             <InterruptVectorAddress>0</InterruptVectorAddress>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STC_Y5, FOSC = 11059200L, UART_BAUD = 115200, UART_PARITYBIT = ODD_PARITY, TEST_MODE = 1, NRF_CAR_SLAVE</Define>
+              <Define>STC_Y5, FOSC = 11059200L, UART_BAUD = 115200, UART_PARITYBIT = ODD_PARITY, TEST_MODE = 1, NRF_CAR_SLAVE , ROCKER_SUM = 1</Define>
               <Undefine></Undefine>
               <IncludePath>..\USER;..\SYSTEM;..\SYSTEM\delay;..\SYSTEM\uart;..\SYSTEM\adc;..\SYSTEM\eeprom;..\SYSTEM\timer;..\SYSTEM\pca;..\SYSTEM\spi;..\HARDWARE\NRF24L01;..\HARDWARE\Rocker;..\APP\NRF_DT</IncludePath>
             </VariousControls>
@@ -1012,47 +1053,6 @@
               <FileName>NRF_DT.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\NRF_DT\NRF_DT.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
             </File>
           </Files>
         </Group>

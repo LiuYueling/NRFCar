@@ -2,8 +2,12 @@
 #include "spi.h"
 
 extern volatile bit SPI_Busy_Flag;
+
 const uint8_t TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 const uint8_t RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
+
+volatile uint8_t TX_PLOAD_WIDTH = 8;//MAX 32字节的用户数据宽度
+volatile uint8_t RX_PLOAD_WIDTH = 8;//MAX 32字节的用户数据宽度
 
 /**********************************************************************
 -  Function :		void NRF24L01_Init(void)
@@ -174,7 +178,7 @@ uint8_t NRF24L01_TxPacket(uint8_t *TxBuf)
 	uint8_t sta;
 	
 	NRF24L01_CE = 0;
-	NRF24L01_Write_Buf(WR_TX_PLOAD, TxBuf, TX_PLOAD_WIDTH);//写数据到TX BUF 32个字节
+	NRF24L01_Write_Buf(WR_TX_PLOAD, TxBuf, TX_PLOAD_WIDTH);//写数据到TX BUF TX_PLOAD_WIDTH个字节
 	NRF24L01_CE = 1;				//启动发送
 	while(NRF24L01_IRQ == 0);		//等待发送完毕
 	sta = NRF24L01_Read_Reg(STATUS);//读取状态寄存器的值

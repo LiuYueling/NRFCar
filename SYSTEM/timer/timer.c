@@ -4,8 +4,8 @@
 #define T0H_Buff 0xD4	//500us
 #define T0L_Buff 0xCD
 
-extern volatile bit Delay_Time0_500ms_Flag;
 
+volatile bit Delay_Time0_500ms_Flag = 0;
 void Timer0_1MS_Init(void)
 {
 	AUXR |= 0x80;		//定时器时钟1T模式
