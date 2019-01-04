@@ -22,7 +22,7 @@
 
 
 volatile bit ADC_OK_Flag = 1;//AD转换完成标志
-uint16_t ADC_BUF[4];//ADC数据缓存区
+uint16_t ADC_BUF[2];//ADC数据缓存区
 volatile uint8_t ADCXY_CH = 0;
 /**********************************************************************
 -  Function :		void Adc_Init(void)
@@ -68,7 +68,7 @@ void Adc_Interruption(void) interrupt 5
 	{
 #if (ROCKER_SUM == 1)
 		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
-		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 0; break;
 		default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
 #elif define (ROCKER_SUM == 2)
 		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;

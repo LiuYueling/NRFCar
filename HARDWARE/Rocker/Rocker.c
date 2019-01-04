@@ -29,9 +29,9 @@ void ADC_UART_TEST(void)
 #if (ROCKER_SUM == 1)
 	xdata uint8_t str[17];
 	
-	sprintf(str, "Rocke_X = %u\t", ONE.X);
+	sprintf(str, "Rocke_X = %x\t", ONE.X);
 	UART_SendString(str);
-	sprintf(str, "Rocker_Y = %u\r\n", ONE.Y);
+	sprintf(str, "Rocker_Y = %x\r\n", ONE.Y);
 	UART_SendString(str);
 #endif
 	

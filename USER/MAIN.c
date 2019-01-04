@@ -21,6 +21,7 @@
 sbit LED_RUN = P5^4;
 sbit Rocker1_Key = P2^2;
 //sbit Rocker2_Key = P2^3;
+
 /**********************************************************************
 -  Function :		void System_Init(void)
 -  Description :	System_Init
@@ -91,18 +92,18 @@ void System_Init(void)
 {
 	UART_SendString("NRF CAR MASTER DEMO\r\n");
 	UART_SendString("DEMO Version: 0.1\r\n");
-	Timer0_1MS_Init();	//Timer0初始化
-	UART_SendString("Timer0 Init\r\n");
 }
 #endif
 
-#if NRF_CAR_SLAVE
+#ifdef NRF_CAR_SLAVE
 {
 	UART_SendString("NRF CAR SLAVE DEMO\r\n");
 	UART_SendString("DEMO Version: 0.1\r\n");
 }
 #endif
-	
+	Timer0_1MS_Init();	//Timer0初始化
+	UART_SendString("Timer0 Init\r\n");
+
 	NRF24L01_Init();	//NRF24L01初始化
 	UART_SendString("NRF24L01 Init\r\n");
 	UART_SendString("NRF24L01 Check...\r\n");
@@ -123,7 +124,7 @@ void System_Init(void)
 }
 #endif
 
-#if NRF_CAR_SLAVE
+#ifdef NRF_CAR_SLAVE
 {
 	/*接收机相关初始化*/
 	NRF24L01_RX_Mode();//配置NRF24L01到RX模式
