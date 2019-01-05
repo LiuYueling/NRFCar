@@ -8,15 +8,7 @@
 **********************************************************************/
 
 //--Header File--//
-#include "SYS.H"
-#include "delay.h"
-#include "uart.h"
-#include "timer.h"
-#include "NRF24L01.h"
-#include "spi.h"
-#include "adc.h"
-#include "Rocker.h"
-#include "NRF_DT.h"
+#include "MAIN.h"
 
 sbit LED_RUN = P5^4;
 sbit Rocker1_Key = P2^2;
