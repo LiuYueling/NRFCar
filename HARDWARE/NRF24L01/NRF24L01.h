@@ -2,7 +2,7 @@
 #define _NRF24L01_H
 
 //--File Include--//
-#include "SYS.H"
+#include "MAIN.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //NRF24L01寄存器操作命令
@@ -50,8 +50,6 @@
 //24L01发送接收数据宽度定义
 #define TX_ADR_WIDTH    5   	//5字节的地址宽度
 #define RX_ADR_WIDTH    5   	//5字节的地址宽度
-
-
 
 //#define TX_PLOAD_WIDTH  8  	//32字节的用户数据宽度
 //#define RX_PLOAD_WIDTH  8  	//32字节的用户数据宽度

@@ -1,62 +1,76 @@
 #include "Rocker.h"
-#include "adc.h"
-#include "uart.h"
 
-#define Average_Cont 3
-#define RockerL_X_CH 0
-#define RockerL_Y_CH 1
-#define RockerR_X_CH 6
-#define RockerR_Y_CH 7
+//extern RockerTypeDef *RackerStruct_P;
 
-extern volatile uint16_t *ADC_BUF;//AD Buff address
-
-#if (ROCKER_SUM == 1)
-RockerTypeDef ONE;
-RockerTypeDef *RackerStruct_P = &ONE;
-#endif
-
-//#if (ROCKER_SUM == 2)
-//RockerTypeDef R;
-//RockerTypeDef L;
+//#if (ROCKER_SUM == 1)
+//extern volatile uint16_t ADC_BUFF[2];//ADC数据缓存区
+//#elif (ROCKER_SUM == 2)
+//extern volatile uint16_t ADC_BUFF[4];
 //#endif
 
-//sbit Rocker1_Key = P2^2;
-//sbit Rocker2_Key = P2^3;
-
-void ADC_UART_TEST(void)
-{
-#if (TEST_MODE == 1)
-#if (ROCKER_SUM == 1)
-	xdata uint8_t str[17];
-	
-	sprintf(str, "Rocke_X = %x\t", ONE.X);
-	UART_SendString(str);
-	sprintf(str, "Rocker_Y = %x\r\n", ONE.Y);
-	UART_SendString(str);
-#endif
-	
-//#if (ROCKER_SUM == 2)
-//	xdata uint8_t str[19];
+//void ADC_UART_TEST(void)
+//{
+//#if (TEST_MODE == 1)
+//#if (ROCKER_SUM == 1)
+////	xdata uint8_t str[17];
 //	
-//	sprintf(str, "Rocker_L_X = %u\t", L.X);
-//	UART_SendString(str);
-//	sprintf(str, "Rocker_L_Y = %u\r\n", L.Y);
-//	UART_SendString(str);
-//	sprintf(str, "Rocker_R_X = %u\t", R.X);
-//	UART_SendString(str);
-//	sprintf(str, "Rocker_R_Y = %u\r\n", R.Y);
-//	UART_SendString(str);
+////	sprintf(str, "Rocke_X = %x\t", ONE.X);
+////	UART_SendString(str);
+////	sprintf(str, "Rocker_Y = %x\r\n", ONE.Y);
+////	UART_SendString(str);
 //#endif
-	
-#endif
-}
+//	
+////#if (ROCKER_SUM == 2)
+////	xdata uint8_t str[19];
+////	
+////	sprintf(str, "Rocker_L_X = %u\t", L.X);
+////	UART_SendString(str);
+////	sprintf(str, "Rocker_L_Y = %u\r\n", L.Y);
+////	UART_SendString(str);
+////	sprintf(str, "Rocker_R_X = %u\t", R.X);
+////	UART_SendString(str);
+////	sprintf(str, "Rocker_R_Y = %u\r\n", R.Y);
+////	UART_SendString(str);
+////#endif
+//	
+//#endif
+//}
 
+void Rocker_init(void)
+{
+	/*Rocker1_Key IO Init*/
+	#if (ROCKER_SUM == 1)
+	{
+		
+		Rocker1_Key = 1;
+	}
+	#endif
+//	#if (ROCKER_SUM == 2)
+//	{
+//		Rocker1_Key = 1;
+//		Rocker2_Key = 1;
+//	}
+//	#endif
+	
+	/*Rocker ADC Init*/
+	Adc_Init();
+	UART_SendString("ADC Init\r\n");
+	
+}
 
 void Get_Rocker(void)
 {
 #if (ROCKER_SUM == 1)//单个遥感
-	ONE.X = ADC_BUF[0];
-	ONE.Y = ADC_BUF[1];
+//	xdata uint8_t str[17];
+	
+//	RackerStruct_P->X = ADC_BUFF[0];
+//	RackerStruct_P->Y = ADC_BUFF[1];
+//	RackerStruct_P->Rocker_Key = Rocker1_Key;
+	
+//	sprintf(str, "Rocke_X = %x\t", ADC_BUFF[0]);
+//	UART_SendString(str);
+//	sprintf(str, "Rocker_Y = %x\r\n", ADC_BUFF[1]);
+//	UART_SendString(str);
 #endif
 	
 //#if (ROCKER_SUM == 2)

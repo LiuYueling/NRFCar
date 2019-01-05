@@ -23,7 +23,7 @@
 #include "SYS.H"
 
 //--Function Prototype--//
-void Timer0_1MS_Init(void);
+void Timer0_1MS_Init(uint16_t xms);
 
 
 #endif

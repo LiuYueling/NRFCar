@@ -6,8 +6,8 @@ extern volatile bit SPI_Busy_Flag;
 const uint8_t TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 const uint8_t RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
 
-volatile uint8_t TX_PLOAD_WIDTH = 8;//MAX 32字节的用户数据宽度
-volatile uint8_t RX_PLOAD_WIDTH = 8;//MAX 32字节的用户数据宽度
+volatile uint8_t TX_PLOAD_WIDTH = 32;	//MAX 32字节的用户数据宽度
+volatile uint8_t RX_PLOAD_WIDTH = 32;	//MAX 32字节的用户数据宽度
 
 /**********************************************************************
 -  Function :		void NRF24L01_Init(void)

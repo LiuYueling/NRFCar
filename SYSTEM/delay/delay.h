@@ -22,12 +22,12 @@
 //--Interface--//
 
 //--Function Prototype--//
-void Delay10us(void);
-void Delay100us(void);
-void Delay5ms(void);		//@11.0592MHz
-void Delay10ms(void);
+//void Delay10us(void);
+//void Delay100us(void);
+//void Delay5ms(void);		//@11.0592MHz
+//void Delay10ms(void);
 void Delay200ms(void);
-void SoftDelay500ms(void);
-void Delay(uint16_t n);
+//void SoftDelay500ms(void);
+//void Delay(uint16_t n);
 #endif
 

@@ -8,7 +8,6 @@
 **********************************************************************/
 
 #include "adc.h"
-#include "delay.h"
 
 //--Type Definition--//
 #define ADC_POWER_ON	0x80				//ADC电源控制位
@@ -22,8 +21,14 @@
 
 
 volatile bit ADC_OK_Flag = 1;//AD转换完成标志
-uint16_t ADC_BUF[2];//ADC数据缓存区
-volatile uint8_t ADCXY_CH = 0;
+volatile uint8_t ADCXY_CH = 0;//AD转换通道
+
+#if (ROCKER_SUM == 1)
+volatile uint16_t ADC_BUFF[2] = {0, 0};//ADC数据缓存区
+#elif (ROCKER_SUM == 2)
+volatile uint16_t ADC_BUFF[4] = {0, 0, 0, 0};
+#endif
+
 /**********************************************************************
 -  Function :		void Adc_Init(void)
 -  Description :	SPI Init
@@ -67,14 +72,14 @@ void Adc_Interruption(void) interrupt 5
 	switch(ADCXY_CH)
 	{
 #if (ROCKER_SUM == 1)
-		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
-		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 0; break;
+		case 0: ADC_BUFF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+		case 1: ADC_BUFF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 0; break;
 		default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
-#elif define (ROCKER_SUM == 2)
-		case 0: ADC_BUF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
-		case 1: ADC_BUF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
-		case 6: ADC_BUF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
-		case 7: ADC_BUF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
+#elif (ROCKER_SUM == 2)
+		case 0: ADC_BUFF[0] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 1; break;
+		case 1: ADC_BUFF[1] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 6; break;
+		case 6: ADC_BUFF[2] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 7; break;
+		case 7: ADC_BUFF[3] = ADC_RES*4 + ADC_RESL; ADCXY_CH = 8; break;//CH=8溢出
 		default: ADC_OK_Flag = 0; ADCXY_CH = 0; break;
 #endif
 	}

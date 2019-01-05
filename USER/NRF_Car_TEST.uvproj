@@ -395,47 +395,6 @@
               <FileName>Rocker.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\Rocker\Rocker.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
             </File>
           </Files>
         </Group>
@@ -506,149 +465,6 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\adc\adc.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>eeprom.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\eeprom\eeprom.h</FilePath>
-            </File>
-            <File>
-              <FileName>eeprom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\eeprom\eeprom.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>pca.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\pca\pca.h</FilePath>
-            </File>
-            <File>
-              <FileName>pca.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\pca\pca.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
             </File>
           </Files>
         </Group>
@@ -660,22 +476,15 @@
               <FileType>1</FileType>
               <FilePath>.\MAIN.c</FilePath>
             </File>
+            <File>
+              <FileName>MAIN.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MAIN.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>VERSION</GroupName>
-          <Files>
-            <File>
-              <FileName>Version.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Version\Version.c</FilePath>
-            </File>
-            <File>
-              <FileName>Version list.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Version\Version list.txt</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
@@ -1068,47 +877,6 @@
               <FileName>Rocker.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\Rocker\Rocker.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
             </File>
           </Files>
         </Group>
@@ -1180,108 +948,6 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\adc\adc.c</FilePath>
             </File>
-            <File>
-              <FileName>eeprom.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\eeprom\eeprom.h</FilePath>
-            </File>
-            <File>
-              <FileName>eeprom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\eeprom\eeprom.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>pca.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\SYSTEM\pca\pca.h</FilePath>
-            </File>
-            <File>
-              <FileName>pca.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\pca\pca.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                  <BankNo>65535</BankNo>
-                </CommonProperty>
-                <File51>
-                  <C51>
-                    <RegisterColoring>2</RegisterColoring>
-                    <VariablesInOrder>2</VariablesInOrder>
-                    <IntegerPromotion>2</IntegerPromotion>
-                    <uAregs>2</uAregs>
-                    <UseInterruptVector>2</UseInterruptVector>
-                    <Fuzzy>8</Fuzzy>
-                    <Optimize>10</Optimize>
-                    <WarningLevel>3</WarningLevel>
-                    <SizeSpeed>2</SizeSpeed>
-                    <ObjectExtend>2</ObjectExtend>
-                    <ACallAJmp>2</ACallAJmp>
-                    <InterruptVectorAddress>0</InterruptVectorAddress>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </C51>
-                </File51>
-              </FileOption>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1292,22 +958,15 @@
               <FileType>1</FileType>
               <FilePath>.\MAIN.c</FilePath>
             </File>
+            <File>
+              <FileName>MAIN.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MAIN.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>VERSION</GroupName>
-          <Files>
-            <File>
-              <FileName>Version.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Version\Version.c</FilePath>
-            </File>
-            <File>
-              <FileName>Version list.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Version\Version list.txt</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>

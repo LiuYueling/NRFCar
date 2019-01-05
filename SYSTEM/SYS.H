@@ -19,7 +19,6 @@
 #include "intrins.h"
 #include "stdio.h"
 #include "intrins.h"
-//#include "uart.h"
 
 
 //--Type Definition--//

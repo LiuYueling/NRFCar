@@ -23,52 +23,52 @@
 -  Others :			@11.0592MHz
 **********************************************************************/
 
-void Delay10us(void)		//@11.0592MHz
-{
-	unsigned char i;
+//void Delay10us(void)		//@11.0592MHz
+//{
+//	unsigned char i;
 
-	_nop_();
-	i = 25;
-	while (--i);
-}
+//	_nop_();
+//	i = 25;
+//	while (--i);
+//}
 
-void Delay100us(void)		//@11.0592MHz
-{
-	unsigned char i, j;
+//void Delay100us(void)		//@11.0592MHz
+//{
+//	unsigned char i, j;
 
-	_nop_();
-	_nop_();
-	i = 2;
-	j = 15;
-	do
-	{
-		while (--j);
-	} while (--i);
-}
+//	_nop_();
+//	_nop_();
+//	i = 2;
+//	j = 15;
+//	do
+//	{
+//		while (--j);
+//	} while (--i);
+//}
 
-void Delay5ms(void)		//@11.0592MHz
-{
-	unsigned char i, j;
+//void Delay5ms(void)		//@11.0592MHz
+//{
+//	unsigned char i, j;
 
-	i = 54;
-	j = 199;
-	do
-	{
-		while (--j);
-	} while (--i);
-}
+//	i = 54;
+//	j = 199;
+//	do
+//	{
+//		while (--j);
+//	} while (--i);
+//}
 
-void Delay10ms(void)		//@11.0592MHz
-{
-	unsigned char i, j;
+//void Delay10ms(void)		//@11.0592MHz
+//{
+//	unsigned char i, j;
 
-	i = 108;
-	j = 145;
-	do
-	{
-		while (--j);
-	} while (--i);
-}
+//	i = 108;
+//	j = 145;
+//	do
+//	{
+//		while (--j);
+//	} while (--i);
+//}
 
 void Delay200ms(void)		//@11.0592MHz
 {
@@ -88,34 +88,34 @@ void Delay200ms(void)		//@11.0592MHz
 	} while (--i);
 }
 
-void SoftDelay500ms(void)		
-{
-	unsigned char i, j, k;
+//void SoftDelay500ms(void)		
+//{
+//	unsigned char i, j, k;
 
-	_nop_();
-	_nop_();
-	i = 22;
-	j = 3;
-	k = 227;
-	do
-	{
-		do
-		{
-			while (--k);
-		} while (--j);
-	} while (--i);
-}
+//	_nop_();
+//	_nop_();
+//	i = 22;
+//	j = 3;
+//	k = 227;
+//	do
+//	{
+//		do
+//		{
+//			while (--k);
+//		} while (--j);
+//	} while (--i);
+//}
 
 #endif
 #endif
 
-void Delay(uint16_t n)
-{
-    uint16_t x;
+//void Delay(uint16_t n)
+//{
+//    uint16_t x;
 
-    while (n--)
-    {
-        x = 5000;
-        while (x--);
-    }
-}
+//    while (n--)
+//    {
+//        x = 5000;
+//        while (x--);
+//    }
+//}

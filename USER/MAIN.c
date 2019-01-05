@@ -10,10 +10,6 @@
 //--Header File--//
 #include "MAIN.h"
 
-sbit LED_RUN = P5^4;
-sbit Rocker1_Key = P2^2;
-//sbit Rocker2_Key = P2^3;
-
 /**********************************************************************
 -  Function :		void System_Init(void)
 -  Description :	System_Init
@@ -47,20 +43,10 @@ void System_Init(void)
 	}
 
 	{/*IO Init*/
-/*Rocker1_Key IO Init*/
+
 #ifdef NRF_CAR_MASTER
 {
-	#if (ROCKER_SUM == 1)
-	{
-		Rocker1_Key = 1;
-	}
-	#endif
-	#if (ROCKER_SUM == 2)
-	{
-		Rocker1_Key = 1;
-		Rocker2_Key = 1;
-	}
-	#endif
+	
 }
 #endif
 
@@ -93,8 +79,6 @@ void System_Init(void)
 	UART_SendString("DEMO Version: 0.1\r\n");
 }
 #endif
-	Timer0_1MS_Init();	//Timer0初始化
-	UART_SendString("Timer0 Init\r\n");
 
 	NRF24L01_Init();	//NRF24L01初始化
 	UART_SendString("NRF24L01 Init\r\n");
@@ -105,14 +89,15 @@ void System_Init(void)
 		UART_SendString("NRF24L01 Check Error\r\n");
 	}
 	UART_SendString("NRF24L01 Check OK\r\n");
-	Delay200ms();
 	
 #ifdef NRF_CAR_MASTER 
 {
 	/*发射机相关初始化*/
 	NRF24L01_TX_Mode();//配置NRF24L01为Tx模式
 	UART_SendString("NRF24L01 TX Mode\r\n");
-	Adc_Init();//ADC初始化
+	Rocker_init();//摇杆输入初始化
+	Timer0_1MS_Init(200);	//Timer0初始化，200ms定时
+	UART_SendString("Timer0 Init\r\n");
 }
 #endif
 
@@ -125,7 +110,7 @@ void System_Init(void)
 		//电机运动相关初始化
 }
 #endif
-	
+	DT_DATA_INIT();//传输协议数据结构初始化
 	UART_SendString("System Init OK\r\n");
 }
 
